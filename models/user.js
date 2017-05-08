@@ -34,6 +34,7 @@ User.prototype.getUser = function(callback) {
             user = {
                 id: result[0].id,
                 email: result[0].email,
+                userType: result[0].user_type,
             }
             callback(user);
         }

@@ -19,6 +19,11 @@
 				<ul class="nav navbar-nav navbar-right">
 					{{#if currentUser}}
 						<li><a href="/user/logout">Logout</a></li>
+						{{#if isEmployer}}
+							<li><a href="#">Employer</a></li>
+						{{else}}
+							<li><a href="#">Job Seeker</a></li>
+						{{/if}}
 					{{else}}
 						<li><a href="/user/login">Login</a></li>
 						<li><a href="/user/register">Register</a></li>

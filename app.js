@@ -22,10 +22,18 @@ app.use(flash());
 
 
 app.get('/', function(req, res){
+    // console.log(req.session);
+    var isEmployer = false;
+    if (req.session.userType === 'seeker') {
+        isEmployer = false;
+    } else {
+        isEmployer = true;
+    }
     res.render('home', {
         expressFlash: req.flash('success'), 
         flashType: 'success',
         currentUser: req.session.userID,
+        isEmployer: isEmployer,
     });
 });
 

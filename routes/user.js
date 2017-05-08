@@ -17,6 +17,7 @@ router.post('/login', function(req, res){
             res.redirect('/user/login');
         } else {
             req.session.userID = u.id;
+            req.session.userType = u.userType;
             req.flash('success', 'Welcome back!');
             res.redirect('/');
         }
@@ -46,6 +47,7 @@ router.post('/register', function(req, res){
             res.redirect('/user/register');
         } else {
             req.session.userID = u.id;
+            req.session.userType = u.userType;
             req.flash('success', 'Account created');
             res.redirect('/');
         }
