@@ -4,20 +4,21 @@ var User = require("../models/user");
 var auth = require("../middleware/auth");
 
 router.get('/login', function(req, res){
-    res.render("login");
+    res.render("login", {expressFlash: req.flash('danger'), flashType: 'danger'});
 });
 
 router.post('/login', function(req, res){
     var email = req.body.email;
     var password = req.body.password;
     var user = new User(email, password);
-    user = user.getUser();
-    if (user === null) {
-        res.send("User info wrong");
-    } else {
-        req.session.userID = user.id;
-        res.send("You're logged in!");
-    }
+    user.getUser(email, function(u){
+        if (u === null) {
+            req.flash('danger', 'Invalid login credentials');
+            res.redirect('/user/login');
+        } else {
+            res.redirect('/');
+        }
+    });
 });
 
 router.get('/profile', auth, function(req, res){

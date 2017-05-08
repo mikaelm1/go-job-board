@@ -12,7 +12,7 @@
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-			<a class="navbar-brand" href="#">Home</a>
+			<a class="navbar-brand" href="/">Home</a>
 			</div>
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -20,12 +20,17 @@
 					{{#if currentUser}}
 						<li><a href="#">Logout</a></li>
 					{{else}}
-						<li><a href="#">Login</a></li>
+						<li><a href="/user/login">Login</a></li>
 					{{/if}}
 				</ul>
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
 	</nav>
+	{{#if expressFlash}}
+		<div class="alert alert-{{flashType}}">
+			<p>{{ expressFlash }}</p>
+		</div>
+	{{/if}}
 
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
 	 crossorigin="anonymous"></script>
