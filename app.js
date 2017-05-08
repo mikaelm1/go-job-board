@@ -15,18 +15,18 @@ app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(session({
-    cookie: { maxAge: 3600 },
-    saveUninitialized: true,
-    resave: 'true',
+    cookie: { maxAge: 36000 },
     secret: 'SuperSecretPassword'
 }));
 app.use(flash());
 
 
 app.get('/', function(req, res){
-    // req.flash('success', 'This is a flash message using the express-flash module.');
-    // res.render('home', {expressFlash: req.flash('success'), flashType: 'success'});
-    res.render('home');
+    res.render('home', {
+        expressFlash: req.flash('success'), 
+        flashType: 'success',
+        currentUser: req.session.userID,
+    });
 });
 
 app.get('/health', function(req, res){
