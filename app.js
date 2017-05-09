@@ -15,8 +15,8 @@ app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(session({
-    cookie: { maxAge: 36000 },
-    secret: 'SuperSecretPassword'
+    secret: 'SuperSecretPassword',
+    cookie: {maxAge: 3600000},
 }));
 app.use(flash());
 
