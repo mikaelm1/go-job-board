@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS education CASCADE;
 
 CREATE TABLE users (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -6,4 +7,13 @@ CREATE TABLE users (
     name VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(100) NOT NULL,
     user_type VARCHAR(100) NOT NULL DEFAULT 'seeker'
+);
+
+CREATE TABLE education (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    major VARCHAR(255) NOT NULL,
+    year_started INT NOT NULL,
+    year_graduated INT,
+    gpa INT NOT NULL
 );
