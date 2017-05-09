@@ -49,10 +49,7 @@ User.prototype.byID = function(callback) {
             if (result.length === 0) {
                 callback('User data not found', null);
             } else {
-                console.log(result);
-                // this.id = result[0].id,
-                // this.email = result[0].email,
-                // this.username = result[0].name,
+                // console.log(result);
                 user = {
                     id: result[0].id,
                     email: result[0].email,
