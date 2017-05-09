@@ -41,6 +41,30 @@ User.prototype.getUser = function(callback) {
     });
 }
 
+User.prototype.byID = function(callback) {
+    pool.query('SELECT * FROM users WHERE id=(?)', this.id, function(err, result){
+        if (err) {
+            callback(err, null);
+        } else {
+            if (result.length === 0) {
+                callback('User data not found', null);
+            } else {
+                console.log(result);
+                // this.id = result[0].id,
+                // this.email = result[0].email,
+                // this.username = result[0].name,
+                user = {
+                    id: result[0].id,
+                    email: result[0].email,
+                    userType: result[0].user_type,
+                    username: result[0].name,
+                }
+                callback(null, user);
+            }
+        }
+    });
+}
+
 User.prototype.createUser = function(callback) {
     // console.log("THIS EMAIL: " + this.userType);
     pool.query('INSERT INTO users SET ?', {name: this.name, email: this.email, password: this.password, user_type: this.userType}, function(err, u){

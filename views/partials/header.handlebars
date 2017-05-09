@@ -1,0 +1,39 @@
+<nav class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+			<a class="navbar-brand" href="/">Home</a>
+			</div>
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-right">
+					{{#if currentUser}}
+						{{#if isEmployer}}
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings For Employer<span class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<li><a href="#">Profile</a></li>
+									<li><a href="/user/logout">Logout</a></li>
+								</ul>
+							</li>
+						{{else}}
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings<span class="caret"></span></a>
+								<ul class="dropdown-menu">
+									<li><a href="/user/profile">Profile</a></li>
+									<li><a href="/user/logout">Logout</a></li>
+								</ul>
+							</li>
+						{{/if}}
+					{{else}}
+						<li><a href="/user/login">Login</a></li>
+						<li><a href="/user/register">Register</a></li>
+					{{/if}}
+				</ul>
+			</div><!-- /.navbar-collapse -->
+		</div><!-- /.container-fluid -->
+	</nav>
+	{{#if expressFlash}}
+		<div class="alert alert-{{flashType}}">
+			<p>{{ expressFlash }}</p>
+		</div>
+	{{/if}}

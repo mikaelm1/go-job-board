@@ -61,7 +61,17 @@ router.get('/logout', function(req, res){
 });
 
 router.get('/profile', auth, function(req, res){
-    res.send("User is authenticated");
+    var user = new User('', '');
+    user.id = req.session.userID;
+    user.byID(function(err, u){
+        if (err) {
+            req.flash('danger', 'Error: ' + err);
+            res.redirect('/');
+        } else {
+            // console.log(u);
+            res.render('userprofile', {user: u});
+        }
+    })
 });
 
 module.exports = router;

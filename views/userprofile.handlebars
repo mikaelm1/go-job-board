@@ -1,0 +1,65 @@
+{{>header}}
+
+<div class="container">
+    {{!--<h1>{{ user.username }}, this is your profile</h1>--}}
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 text-center">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Your info</h3>
+                </div>
+                <div class="panel-body text-left">
+                    <strong>Name:</strong> <p>{{ user.username }}</p>
+                    <strong>Email:</strong> <p>{{ user.email }}</p>
+                    <form action="#" method="post">
+                        <button type="submit" class="btn btn-primary">Edit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 text-center">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Your Education</h3> 
+                </div>
+                <div class="panel-body text-left">
+                    <strong>School:</strong> <p>{{ user.username }}</p>
+                    <strong>Year Started:</strong> <p>{{ user.email }}</p>
+                    <strong>Year Graduated:</strong> <p>{{ user.email }}</p>
+                    <strong>GPA:</strong> <p>{{ user.email }}</p>
+                    <form action="#" method="post">
+                        <button type="submit" class="btn btn-primary">Edit</button>
+                    </form>
+                </div>
+            </div>
+            <form action="#" method="post">
+                <button type="submit" class="btn btn-primary">Add Education</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 2%">
+        <div class="col-md-6 col-md-offset-3 text-center">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Projects</h3>
+                </div>
+                <div class="panel-body text-left">
+                    <strong>School:</strong> <p>{{ user.username }}</p>
+                    <strong>Year Started:</strong> <p>{{ user.email }}</p>
+                    <strong>Year Graduated:</strong> <p>{{ user.email }}</p>
+                    <strong>GPA:</strong> <p>{{ user.email }}</p>
+                    <form action="#" method="post">
+                        <button type="submit" class="btn btn-primary">Edit</button>
+                    </form>
+                </div>
+            </div>
+            <form action="#" method="post">
+                <button type="submit" class="btn btn-primary">Add Project</button>
+            </form>
+        </div>
+    </div>
+
+</div>
