@@ -13,12 +13,19 @@ router.post('/login', function(req, res){
     var user = new User(email, password);    
     user.getUser(function(u){
         if (u === null) {
-            req.flash('danger', 'Invalid login credentials');
+            // req.flash('danger', 'Invalid login credentials');
+            req.session.sessionFlash = {
+                type: 'danger',
+                message: 'Invalid login credentials'
+            }
             res.redirect('/user/login');
         } else {
             req.session.userID = u.id;
             req.session.userType = u.userType;
-            req.flash('success', 'Welcome back!');
+            req.session.sessionFlash = {
+                type: 'success',
+                message: 'Welcome back!'
+            }
             res.redirect('/');
         }
     });
@@ -43,24 +50,36 @@ router.post('/register', function(req, res){
     //name, email, password, type, callback
     user.createUser(function(err, u){
         if (err) {
-            req.flash('danger', 'Error creating account: ' + err);
+            // req.flash('danger', 'Error creating account: ' + err);
+            req.session.sessionFlash = {
+                type: 'danger',
+                message: 'Error creating account'
+            }
             res.redirect('/user/register');
         } else {
             req.session.userID = u.id;
             req.session.userType = u.userType;
-            req.flash('success', 'Account created');
+            // req.flash('success', 'Account created');
+            req.session.sessionFlash = {
+                type: 'success',
+                message: 'Account created!'
+            }
             res.redirect('/');
         }
     })
 });
 
 router.get('/logout', function(req, res){
-    req.flash('success', 'You have successfully logged out');
+    // req.flash('success', 'You have successfully logged out');
     req.session.destroy();
+    // req.session.sessionFlash = {
+    //     type: 'success',
+    //     message: 'You have successfully logged out'
+    // }
     res.redirect('/');
 });
 
-router.get('/profile', auth, function(req, res){
+router.get('/profile', auth.isLoggedIn, function(req, res){
     var user = new User('', '');
     user.id = req.session.userID;
     user.byID(function(err, u){

@@ -11,9 +11,11 @@ CREATE TABLE users (
 
 CREATE TABLE education (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    user_id INT(11),
     name VARCHAR(255) NOT NULL,
     major VARCHAR(255) NOT NULL,
     year_started INT NOT NULL,
     year_graduated INT,
-    gpa INT NOT NULL
-);
+    gpa INT NOT NULL,
+    CONSTRAINT fk_education_user FOREIGN KEY (user_id) REFERENCES users (id)
+)ENGINE=InnoDB;

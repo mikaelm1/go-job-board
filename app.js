@@ -7,6 +7,7 @@ var flash = require('express-flash');
 var app = express();
 
 var userRoutes = require('./routes/user');
+var educationRoutes = require('./routes/education');
 
 app.set('port', 8000);
 app.engine('handlebars', handlebars.engine);
@@ -19,6 +20,14 @@ app.use(session({
     cookie: {maxAge: 3600000},
 }));
 app.use(flash());
+
+app.use(function(req, res, next){
+    // console.log('INSIDE CUSTOM FLASH MIDDLEWARE');
+    // if there's a flash message in the session request, make it available in the response, then delete it
+    res.locals.sessionFlash = req.session.sessionFlash;
+    delete req.session.sessionFlash;
+    next();
+});
 
 
 app.get('/', function(req, res){
@@ -45,6 +54,7 @@ app.get('/health', function(req, res){
 });
 
 app.use('/user', userRoutes);
+app.use('/education', educationRoutes);
 
 
 app.listen(app.get('port'), function(){

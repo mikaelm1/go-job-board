@@ -32,8 +32,8 @@
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
 	</nav>
-	{{#if expressFlash}}
-		<div class="alert alert-{{flashType}}">
-			<p>{{ expressFlash }}</p>
+	{{#if sessionFlash}}
+		<div class="alert alert-{{sessionFlash.type}}">
+			<p>{{ sessionFlash.message }}</p>
 		</div>
 	{{/if}}

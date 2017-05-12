@@ -1,7 +1,6 @@
 {{>header}}
 
 <div class="container">
-    {{!--<h1>{{ user.username }}, this is your profile</h1>--}}
     <div class="row">
         <div class="col-md-6 col-md-offset-3 text-center">
             <div class="panel panel-primary">
@@ -11,9 +10,9 @@
                 <div class="panel-body text-left">
                     <strong>Name:</strong> <p>{{ user.username }}</p>
                     <strong>Email:</strong> <p>{{ user.email }}</p>
-                    <form action="#" method="post">
+                    {{!--<form action="#" method="post">
                         <button type="submit" class="btn btn-primary">Edit</button>
-                    </form>
+                    </form>--}}
                 </div>
             </div>
         </div>
@@ -29,12 +28,12 @@
                     <strong>Year Started:</strong> <p>{{ user.email }}</p>
                     <strong>Year Graduated:</strong> <p>{{ user.email }}</p>
                     <strong>GPA:</strong> <p>{{ user.email }}</p>
-                    <form action="#" method="post">
+                    <form action="/education/edit" method="get">
                         <button type="submit" class="btn btn-primary">Edit</button>
                     </form>
                 </div>
             </div>
-            <form action="#" method="post">
+            <form action="/education/" method="get">
                 <button type="submit" class="btn btn-primary">Add Education</button>
             </form>
         </div>

@@ -13,4 +13,17 @@ var isLoggedIn = function (req, res, next) {
     res.redirect("/user/login");
 }
 
-module.exports = isLoggedIn;
+var isSeeker = function(req, res, next) {
+    if (req.session.userID && req.session.userType === 'seeker') {
+        res.locals.currentUser = req.session.userID;
+        res.locals.isEmployer = false;
+        return next();
+    } else {
+        res.redirect('/');
+    }
+}
+
+module.exports = {
+    isLoggedIn,
+    isSeeker,
+};
