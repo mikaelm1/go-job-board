@@ -31,7 +31,7 @@ User.prototype.getUser = function(callback) {
         if (result.length === 0) {
             callback(null);
         } else {
-            user = {
+            var user = {
                 id: result[0].id,
                 email: result[0].email,
                 userType: result[0].user_type,
@@ -60,6 +60,52 @@ User.prototype.byID = function(callback) {
             }
         }
     });
+}
+
+User.prototype.byIDWithEducation = function(callback) {
+    var sql = 'SELECT * FROM users u INNER JOIN '+
+    'education ed ON ed.user_id = u.id '+
+    'WHERE u.id=?';
+    var options = {sql: sql, nestTables: true}
+    pool.query(options, this.id, function(err, result, fields){
+        if (err) {
+            console.log('Error: ' + err);
+            callback(err, null);
+        } else {
+            // console.log(result);
+            // console.log(result.length);
+            var data = [];
+            for (var i=0; i<result.length; i++) {
+                data[i] = {
+                    uName: result[i].u.name,
+                    uEmail: result[i].u.email,
+                    edName: result[i].ed.name,
+                    edMajor: result[i].ed.major,
+                    edYearStarted: result[i].ed.year_started,
+                    edYearEnded: result[i].ed.year_graduated,
+                    edGPA: result[i].ed.gpa,
+                }
+            }
+            // console.log(fields);
+            callback(null, data);
+        }
+    });
+    // pool.query({
+    //     sql: sql,
+    //     nestTables: '_',
+    //     timeout: 50000,
+    //     values: [this.id]
+    // }, function(err, result, fields){
+    //     if (err) {
+    //         console.log(result);
+    //         console.log('Error: ' + err);
+    //         callback(err, null);
+    //     } else {
+    //         console.log('Result: ' + result);
+    //         console.log('Fields: ' + fields);
+    //         callback(null, fields);
+    //     }
+    // });
 }
 
 User.prototype.createUser = function(callback) {

@@ -82,13 +82,14 @@ router.get('/logout', function(req, res){
 router.get('/profile', auth.isLoggedIn, function(req, res){
     var user = new User('', '');
     user.id = req.session.userID;
-    user.byID(function(err, u){
+    user.byIDWithEducation(function(err, data){
         if (err) {
             req.flash('danger', 'Error: ' + err);
             res.redirect('/');
         } else {
-            // console.log(u);
-            res.render('userprofile', {user: u});
+            // console.log('DATA:')
+            // console.log(data);
+            res.render('userprofile', {data: data});
         }
     })
 });

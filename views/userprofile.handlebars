@@ -8,8 +8,8 @@
                     <h3 class="panel-title">Your info</h3>
                 </div>
                 <div class="panel-body text-left">
-                    <strong>Name:</strong> <p>{{ user.username }}</p>
-                    <strong>Email:</strong> <p>{{ user.email }}</p>
+                    <strong>Name:</strong> <p>{{ data.0.uName }}</p>
+                    <strong>Email:</strong> <p>{{ data.0.uEmail }}</p>
                     {{!--<form action="#" method="post">
                         <button type="submit" class="btn btn-primary">Edit</button>
                     </form>--}}
@@ -24,13 +24,16 @@
                     <h3 class="panel-title">Your Education</h3> 
                 </div>
                 <div class="panel-body text-left">
-                    <strong>School:</strong> <p>{{ user.username }}</p>
-                    <strong>Year Started:</strong> <p>{{ user.email }}</p>
-                    <strong>Year Graduated:</strong> <p>{{ user.email }}</p>
-                    <strong>GPA:</strong> <p>{{ user.email }}</p>
-                    <form action="/education/edit" method="get">
-                        <button type="submit" class="btn btn-primary">Edit</button>
-                    </form>
+                    {{#each data}}
+                        <hr>   
+                        <strong>School:</strong> <p>{{ this.edName }}</p>
+                        <strong>Year Started:</strong> <p>{{ this.edYearStarted }}</p>
+                        <strong>Year Graduated:</strong> <p>{{ this.edYearEnded }}</p>
+                        <strong>GPA:</strong> <p>{{ this.edGPA }}</p>
+                        {{!--<form action="/education/edit" method="get">
+                            <button type="submit" class="btn btn-primary">Edit</button>
+                        </form>--}}
+                    {{/each}}
                 </div>
             </div>
             <form action="/education/" method="get">
