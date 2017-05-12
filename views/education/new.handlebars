@@ -3,18 +3,18 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
-            <form action="/education/login" method="post">
+            <form action="/education/new" method="post">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">School Name</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" placeholder="Enter email">
+                    <label for="exampleInput">School Name</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" name="name" placeholder="">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Major</label>
-                    <input type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Password">
+                    <label for="exampleInput">Major</label>
+                    <input type="text" class="form-control" name="major" id="exampleInput" >
                 </div>
                 <div class="form-group">
                     <label for="exampleSelect1">Year Started</label>
-                    <select class="form-control" id="exampleSelect1" name="yearEnded">
+                    <select class="form-control" id="exampleSelect1" name="yearStarted">
                     <option>2012</option>
                     <option>2013</option>
                     <option>2014</option>
@@ -36,6 +36,10 @@
                     <option>2019</option>
                     <option>2020</option>
                     </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInput">GPA</label>
+                    <input type="text" class="form-control" name="gpa" id="exampleInput" >
                 </div>
                 <button type="submit" class="btn btn-primary">Add</button>
             </form>
