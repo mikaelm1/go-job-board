@@ -1,5 +1,6 @@
-DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS education CASCADE;
+DROP TABLE IF EXISTS projects CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
 
 CREATE TABLE users (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -18,4 +19,15 @@ CREATE TABLE education (
     year_graduated INT,
     gpa INT NOT NULL,
     CONSTRAINT fk_education_user FOREIGN KEY (user_id) REFERENCES users (id)
+)ENGINE=InnoDB;
+
+CREATE TABLE projects (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    user_id INT(11),
+    title VARCHAR(100),
+    notes TEXT DEFAULT NULL,
+    start_year INT NOT NULL,
+    end_year INT NOT NULL,
+    url VARCHAR(255) DEFAULT NULL,
+    CONSTRAINT fk_project_user FOREIGN KEY (user_id) REFERENCES users (id)
 )ENGINE=InnoDB;
