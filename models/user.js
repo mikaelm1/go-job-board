@@ -48,6 +48,31 @@ User.prototype.byID = function(callback) {
     });
 }
 
+User.prototype.projects = function(callback) {
+    var sql = 'SELECT * FROM projects WHERE user_id=?';
+    pool.query(sql, this.id, function(err, results){
+        if (err) {
+            callback(err, null);
+        } else {
+            // console.log(results);
+            var data = [];
+            for (var i=0; i<results.length; i++) {
+                data[i] = {
+                    id: results[i].id,
+                    name: results[i].title,
+                    notes: results[i].notes,
+                    yearStarted: results[i].start_year,
+                    yearEnded: results[i].end_year,
+                }
+                if (data[i].yearEnded === -1) {
+                    data[i].yearEnded = 'Current';
+                }
+            }   
+            callback(null, data);
+        }
+    });
+}
+
 User.prototype.byIDWithEducation = function(callback) {
     // var sql = 'SELECT * FROM users u INNER JOIN '+
     // 'education ed ON ed.user_id = u.id '+

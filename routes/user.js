@@ -99,8 +99,16 @@ router.get('/profile', auth.isLoggedIn, function(req, res){
                 } 
                 // console.log('DATA:')
                 // console.log(u);
-                // console.log(education);               
-                res.render('userprofile', {education: education, user: u});
+                // console.log(education);  
+                user.projects(function(err, projects){
+                    if (err) {
+                        res.locals.sessionFlash = {
+                            type: 'danger',
+                            message: 'Error ' + err,
+                        }
+                    }
+                    res.render('userprofile', {education: education, user: u, projects: projects});
+                });
             });
 
         }
