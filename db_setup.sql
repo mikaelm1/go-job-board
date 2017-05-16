@@ -28,6 +28,5 @@ CREATE TABLE projects (
     notes TEXT DEFAULT NULL,
     start_year INT NOT NULL,
     end_year INT NOT NULL,
-    url VARCHAR(255) DEFAULT NULL,
-    CONSTRAINT fk_project_user FOREIGN KEY (user_id) REFERENCES users (id)
+   CONSTRAINT fk_project_user FOREIGN KEY (user_id) REFERENCES users (id)
 )ENGINE=InnoDB;

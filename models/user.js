@@ -1,18 +1,4 @@
-var mysql = require('mysql');
-// var pool = mysql.createPool({
-//   connectionLimit : 10,
-//   host            : 'mysql.eecs.oregonstate.edu',
-//   user            : 'cs340_mukhsikm',
-//   password        : '1786',
-//   database        : 'cs290_mukhsikm'
-// });
-var pool = mysql.createPool({
-  connectionLimit : 10,
-  host            : 'localhost',
-  user            : 'root',
-  password        : '',
-  database        : 'job_board'
-});
+var pool = require('../db');
 
 function User(email, password) {
     this.email = email;
@@ -90,22 +76,6 @@ User.prototype.byIDWithEducation = function(callback) {
             callback(null, data);
         }
     });
-    // pool.query({
-    //     sql: sql,
-    //     nestTables: '_',
-    //     timeout: 50000,
-    //     values: [this.id]
-    // }, function(err, result, fields){
-    //     if (err) {
-    //         console.log(result);
-    //         console.log('Error: ' + err);
-    //         callback(err, null);
-    //     } else {
-    //         console.log('Result: ' + result);
-    //         console.log('Fields: ' + fields);
-    //         callback(null, fields);
-    //     }
-    // });
 }
 
 User.prototype.createUser = function(callback) {

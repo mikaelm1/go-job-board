@@ -32,7 +32,7 @@ router.post('/login', function(req, res){
 });
 
 router.get('/register', function(req, res){
-    res.render('register', {expressFlash: req.flash('danger'), flashType: 'danger'});
+    res.render('register');
 });
 
 router.post('/register', function(req, res){

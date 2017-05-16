@@ -8,6 +8,7 @@ var app = express();
 
 var userRoutes = require('./routes/user');
 var educationRoutes = require('./routes/education');
+var projectRoutes = require('./routes/project');
 
 app.set('port', 8000);
 app.engine('handlebars', handlebars.engine);
@@ -58,6 +59,7 @@ app.get('/health', function(req, res){
 
 app.use('/user', userRoutes);
 app.use('/education', educationRoutes);
+app.use('/project', projectRoutes);
 
 
 app.listen(app.get('port'), function(){

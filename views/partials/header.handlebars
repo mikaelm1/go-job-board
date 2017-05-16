@@ -31,13 +31,13 @@
 				</ul>
 			</div><!-- /.navbar-collapse -->
 		</div><!-- /.container-fluid -->
-	</nav>
+</nav>
 	<div class="row">
-		<div class="col-md-6 offset-md-3">
-			{{#if sessionFlash}}
-				<div class="alert alert-{{sessionFlash.type}}">
-					<p>{{ sessionFlash.message }}</p>
-				</div>
-			{{/if}}
+			<div class="col-md-10 offset-md-1">
+				{{#if sessionFlash}}
+					<div class="alert alert-{{sessionFlash.type}}">
+						<p>{{ sessionFlash.message }}</p>
+					</div>
+				{{/if}}
+			</div>
 		</div>
-	</div>
