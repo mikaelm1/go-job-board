@@ -22,6 +22,7 @@ function Education(name, major, yearStarted, yearEnded, gpa) {
     this.gpa = gpa;
 }
 
+
 Education.prototype.create = function(uid, callback){
     console.log('UID: ' + uid);
     console.log(this.name, this.major, this.gpa, this.yearStarted, this.yearEnded);

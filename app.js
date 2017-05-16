@@ -19,7 +19,7 @@ app.use(session({
     secret: 'SuperSecretPassword',
     cookie: {maxAge: 3600000},
 }));
-app.use(flash());
+// app.use(flash());
 
 app.use(function(req, res, next){
     // console.log('INSIDE CUSTOM FLASH MIDDLEWARE');
@@ -32,6 +32,11 @@ app.use(function(req, res, next){
 
 app.get('/', function(req, res){
     // console.log(req.session);
+    // res.locals.sessionFlash = {
+    //     type: 'success',
+    //     message: 'This is a flash message using custom middleware and express-session.'
+    // }
+    // console.log(res.locals);
     var isEmployer = false;
     if (req.session.userType === 'seeker') {
         isEmployer = false;
@@ -39,8 +44,6 @@ app.get('/', function(req, res){
         isEmployer = true;
     }
     res.render('home', {
-        expressFlash: req.flash('success'), 
-        flashType: 'success',
         currentUser: req.session.userID,
         isEmployer: isEmployer,
     });

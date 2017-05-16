@@ -5,10 +5,10 @@ var auth = require("../middleware/auth");
 
 router.get('/', auth.isSeeker, function(req, res){
     // console.log('INSIDE education/');
-    // res.locals.sessionFlash = {
-    //     type: 'success',
-    //     message: 'This is a flash message using custom middleware and express-session.'
-    // }
+    res.locals.sessionFlash = {
+        type: 'success',
+        message: 'This is a flash message using custom middleware and express-session.'
+    }
     res.render('education/new');
 });
 

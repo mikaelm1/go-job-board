@@ -4,7 +4,7 @@ var User = require("../models/user");
 var auth = require("../middleware/auth");
 
 router.get('/login', function(req, res){
-    res.render("login", {expressFlash: req.flash('danger'), flashType: 'danger'});
+    res.render("login");
 });
 
 router.post('/login', function(req, res){
@@ -82,14 +82,27 @@ router.get('/logout', function(req, res){
 router.get('/profile', auth.isLoggedIn, function(req, res){
     var user = new User('', '');
     user.id = req.session.userID;
-    user.byIDWithEducation(function(err, data){
+    user.byID(function(err, u){
         if (err) {
-            req.flash('danger', 'Error: ' + err);
+            req.session.sessionFlash = {
+                type: 'danger',
+                message: 'Error: ' + err,
+            }
             res.redirect('/');
         } else {
-            // console.log('DATA:')
-            // console.log(data);
-            res.render('userprofile', {data: data});
+            user.byIDWithEducation(function(err, education){
+                if (err) {
+                    res.locals.sessionFlash = {
+                        type: 'danger',
+                        message: 'Error ' + err,
+                    }
+                } 
+                // console.log('DATA:')
+                // console.log(u);
+                // console.log(education);               
+                res.render('userprofile', {education: education, user: u});
+            });
+
         }
     })
 });

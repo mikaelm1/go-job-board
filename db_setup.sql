@@ -17,7 +17,7 @@ CREATE TABLE education (
     major VARCHAR(255) NOT NULL,
     year_started INT NOT NULL,
     year_graduated INT,
-    gpa INT NOT NULL,
+    gpa VARCHAR(20) NOT NULL,
     CONSTRAINT fk_education_user FOREIGN KEY (user_id) REFERENCES users (id)
 )ENGINE=InnoDB;
 

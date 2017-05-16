@@ -63,9 +63,10 @@ User.prototype.byID = function(callback) {
 }
 
 User.prototype.byIDWithEducation = function(callback) {
-    var sql = 'SELECT * FROM users u INNER JOIN '+
-    'education ed ON ed.user_id = u.id '+
-    'WHERE u.id=?';
+    // var sql = 'SELECT * FROM users u INNER JOIN '+
+    // 'education ed ON ed.user_id = u.id '+
+    // 'WHERE u.id=?';
+    var sql = 'SELECT * FROM education WHERE user_id=?'
     var options = {sql: sql, nestTables: true}
     pool.query(options, this.id, function(err, result, fields){
         if (err) {
@@ -77,16 +78,15 @@ User.prototype.byIDWithEducation = function(callback) {
             var data = [];
             for (var i=0; i<result.length; i++) {
                 data[i] = {
-                    uName: result[i].u.name,
-                    uEmail: result[i].u.email,
-                    edName: result[i].ed.name,
-                    edMajor: result[i].ed.major,
-                    edYearStarted: result[i].ed.year_started,
-                    edYearEnded: result[i].ed.year_graduated,
-                    edGPA: result[i].ed.gpa,
+                    id: result[i].education.id,
+                    name: result[i].education.name,
+                    major: result[i].education.major,
+                    yearStarted: result[i].education.year_started,
+                    yearEnded: result[i].education.year_graduated,
+                    gpa: result[i].education.gpa,
                 }
             }
-            // console.log(fields);
+            // console.log(data);
             callback(null, data);
         }
     });

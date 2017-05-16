@@ -8,8 +8,8 @@
                     <h3 class="panel-title">Your info</h3>
                 </div>
                 <div class="panel-body text-left">
-                    <strong>Name:</strong> <p>{{ data.0.uName }}</p>
-                    <strong>Email:</strong> <p>{{ data.0.uEmail }}</p>
+                    <strong>Name:</strong> <p>{{ user.username }}</p>
+                    <strong>Email:</strong> <p>{{ user.email }}</p>
                     {{!--<form action="#" method="post">
                         <button type="submit" class="btn btn-primary">Edit</button>
                     </form>--}}
@@ -24,12 +24,12 @@
                     <h3 class="panel-title">Your Education</h3> 
                 </div>
                 <div class="panel-body text-left">
-                    {{#each data}}
+                    {{#each education}}
                         <hr>   
-                        <strong>School:</strong> <p>{{ this.edName }}</p>
-                        <strong>Year Started:</strong> <p>{{ this.edYearStarted }}</p>
-                        <strong>Year Graduated:</strong> <p>{{ this.edYearEnded }}</p>
-                        <strong>GPA:</strong> <p>{{ this.edGPA }}</p>
+                        <strong>School:</strong> <p>{{ this.name }}</p>
+                        <strong>Year Started:</strong> <p>{{ this.yearStarted }}</p>
+                        <strong>Year Graduated:</strong> <p>{{ this.yearEnded }}</p>
+                        <strong>GPA:</strong> <p>{{ this.gpa }}</p>
                         {{!--<form action="/education/edit" method="get">
                             <button type="submit" class="btn btn-primary">Edit</button>
                         </form>--}}
