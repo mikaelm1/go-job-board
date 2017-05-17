@@ -5,6 +5,29 @@ function Employer(email, password) {
     this.password = password;
 }
 
+Employer.prototype.byEmail = function(callback) {
+    var sql = 'SELECT * FROM employers WHERE email=?';
+    pool.query(sql, this.email, function(err, e){
+        if (err) {
+            callback('Error: ' + err, null);
+        } else {
+            // console.log(e);
+            if (e.length === 0) {
+                callback('Invalid credentials.', null)
+            } else {
+                var employer = {
+                    id: e[0].id,
+                    email: e[0].email,
+                    name: e[0].name,
+                    city: e[0].city,
+                    state: [0].state,
+                }
+                callback(null, employer);
+            }
+        }
+    });
+}
+
 Employer.prototype.create = function(callback) {
     var sql = 'INSERT INTO employers (email, name, password, city, state) VALUES (?, ?, ?, ?, ?)';
     pool.query({

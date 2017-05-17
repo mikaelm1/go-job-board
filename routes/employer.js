@@ -11,12 +11,12 @@ router.post('/login', function(req, res){
     var email = req.body.email;
     var password = req.body.password;
     var user = new Employer(email, password);    
-    user.getUser(function(u){
-        if (u === null) {
+    user.byEmail(function(err, u){
+        if (err) {
             // req.flash('danger', 'Invalid login credentials');
             req.session.sessionFlash = {
                 type: 'danger',
-                message: 'Invalid login credentials'
+                message: err,
             }
             res.redirect('/employer/login');
         } else {
