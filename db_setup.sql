@@ -2,6 +2,8 @@ DROP TABLE IF EXISTS education CASCADE;
 DROP TABLE IF EXISTS projects CASCADE;
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS employers CASCADE;
+DROP TABLE IF EXISTS jobs CASCADE;
+DROP TABLE IF EXISTS jobs_users CASCADE;
 
 CREATE TABLE users (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -39,4 +41,20 @@ CREATE TABLE projects (
     start_year INT NOT NULL,
     end_year INT NOT NULL,
    CONSTRAINT fk_project_user FOREIGN KEY (user_id) REFERENCES users (id)
+)ENGINE=InnoDB;
+
+CREATE TABLE jobs (
+    id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(255) NOT NULL,
+    notes TEXT NOT NULL,
+    e_id INT(11),
+    CONSTRAINT fk_job_employer FOREIGN KEY (e_id) REFERENCES employers (id)
+)ENGINE=InnoDB;
+
+CREATE TABLE jobs_users (
+    uid INT(11) NOT NULL,
+    jid INT(11) NOT NULL,
+    PRIMARY KEY (uid, jid),
+    CONSTRAINT fk_jobs_users_user FOREIGN KEY (uid) REFERENCES users (id),
+    CONSTRAINT fk_jobs_users_job FOREIGN KEY (jid) REFERENCES jobs (id)
 )ENGINE=InnoDB;
