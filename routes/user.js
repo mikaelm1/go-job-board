@@ -4,7 +4,7 @@ var User = require("../models/user");
 var auth = require("../middleware/auth");
 
 router.get('/login', function(req, res){
-    res.render("login");
+    res.render("login", {isUser: true});
 });
 
 router.post('/login', function(req, res){
@@ -21,7 +21,8 @@ router.post('/login', function(req, res){
             res.redirect('/user/login');
         } else {
             req.session.userID = u.id;
-            req.session.userType = u.userType;
+            // req.session.userType = u.userType;
+            req.session.userType = 'seeker';
             req.session.sessionFlash = {
                 type: 'success',
                 message: 'Welcome back!'
@@ -39,26 +40,26 @@ router.post('/register', function(req, res){
     var name = req.body.username;
     var email = req.body.email;
     var password = req.body.password;
-    var userType = req.body.userType;
+    // var userType = req.body.userType;
     var user = new User(email, password);
     user.name = name;
-    if (userType == 'Job Seeker') {
-        user.userType = 'seeker';
-    } else {
-        user.userType = 'employer';
-    }
+    // if (userType == 'Job Seeker') {
+    //     user.userType = 'seeker';
+    // } else {
+    //     user.userType = 'employer';
+    // }
     //name, email, password, type, callback
     user.createUser(function(err, u){
         if (err) {
             // req.flash('danger', 'Error creating account: ' + err);
             req.session.sessionFlash = {
                 type: 'danger',
-                message: 'Error creating account'
+                message: 'Error creating account: ' + err,
             }
             res.redirect('/user/register');
         } else {
             req.session.userID = u.id;
-            req.session.userType = u.userType;
+            req.session.userType = 'seeker';
             // req.flash('success', 'Account created');
             req.session.sessionFlash = {
                 type: 'success',

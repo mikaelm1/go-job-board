@@ -23,7 +23,18 @@ var isSeeker = function(req, res, next) {
     }
 }
 
+var isEmployer = function(req, res, next) {
+    if (req.session.userID && req.session.userType === 'employer') {
+        res.locals.currentUser = req.session.userID;
+        res.locals.isEmployer = true;
+        return next();
+    } else {
+        res.redirect('/');
+    }
+}
+
 module.exports = {
     isLoggedIn,
     isSeeker,
+    isEmployer,
 };
