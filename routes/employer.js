@@ -68,4 +68,18 @@ router.post('/register', function(req, res){
     })
 });
 
+router.get('/profile', auth.isEmployer, function(req, res){
+    var employer = new Employer('', '');
+    employer.id = req.session.userID;
+    employer.byID(function(err, e){
+        if (err) {
+            res.locals.sessionFlash = {
+                type: 'danger',
+                message: err,
+            }
+        } 
+        res.render('employer/profile', {employer: e});
+    });
+});
+
 module.exports = router;
