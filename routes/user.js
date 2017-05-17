@@ -33,7 +33,7 @@ router.post('/login', function(req, res){
 });
 
 router.get('/register', function(req, res){
-    res.render('register');
+    res.render('register', {isUser: true});
 });
 
 router.post('/register', function(req, res){
@@ -58,7 +58,8 @@ router.post('/register', function(req, res){
             }
             res.redirect('/user/register');
         } else {
-            req.session.userID = u.id;
+            // console.log(u.insertId);
+            req.session.userID = u.insertId;
             req.session.userType = 'seeker';
             // req.flash('success', 'Account created');
             req.session.sessionFlash = {

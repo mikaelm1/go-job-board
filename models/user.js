@@ -105,13 +105,14 @@ User.prototype.byIDWithEducation = function(callback) {
 
 User.prototype.createUser = function(callback) {
     // console.log("THIS EMAIL: " + this.userType);
-    pool.query('INSERT INTO users SET ?', {name: this.name, email: this.email, password: this.password, user_type: this.userType}, function(err, u){
+    pool.query('INSERT INTO users SET ?', {name: this.name, email: this.email, password: this.password}, function(err, u){
         if (err){
             console.log("Error creating user: " + err);
             callback(err, null);
             return null;
         }
-        callback(null, 'Success');
+        // console.log(u);
+        callback(null, u);
     });
     // pool.query({
     //     sql: 'INSERT INTO users SET ?',
