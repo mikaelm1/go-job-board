@@ -7,8 +7,8 @@ CREATE TABLE users (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     email VARCHAR(100) NOT NULL UNIQUE,
     name VARCHAR(100) NOT NULL UNIQUE,
-    password VARCHAR(100) NOT NULL,
-    user_type VARCHAR(100) NOT NULL DEFAULT 'seeker'
+    password VARCHAR(100) NOT NULL
+    -- user_type VARCHAR(100) NOT NULL DEFAULT 'seeker'
 )ENGINE=InnoDB;
 
 CREATE TABLE employers (
