@@ -12,7 +12,7 @@ router.get('/', function(req, res){
                 message: err,
             }
         }
-        res.send({'jobs': jobs}); 
+        res.render('job/index', {jobs: jobs}); 
     })
 });
 

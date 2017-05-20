@@ -29,10 +29,12 @@ Job.prototype.getAll = function(callback) {
                 var jobs = [];
                 for (var i=0; i<results.length; i++) {
                     jobs[i] = {
-                        id: results[i].id,   
+                        id: results[i].id,  
+                        title: results[i].title,
+                        notes: results[i].notes,
                     }
                 }
-                callback(null, results);
+                callback(null, jobs);
             }
         }
     });
