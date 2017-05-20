@@ -107,4 +107,10 @@ router.get('/applicants/:jid', auth.isEmployer, function(req, res){
     });
 });
 
+// router.post('/job/remove/:jid', auth.isEmployer, function(req, res){
+//     var j = new Job('', '');
+//     j.id = req.params.jid;
+
+// });
+
 module.exports = router;

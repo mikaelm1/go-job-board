@@ -30,9 +30,9 @@
                         <strong>Year Started:</strong> <p>{{ this.yearStarted }}</p>
                         <strong>Year Graduated:</strong> <p>{{ this.yearEnded }}</p>
                         <strong>GPA:</strong> <p>{{ this.gpa }}</p>
-                        {{!--<form action="/education/edit" method="get">
-                            <button type="submit" class="btn btn-primary">Edit</button>
-                        </form>--}}
+                        <form action="/education/edit/{{this.id}}" method="get">
+                            <button type="submit" class="btn btn-primary">Edit {{this.name}}</button>
+                        </form>
                     {{/each}}
                 </div>
             </div>

@@ -97,7 +97,7 @@ router.get('/apps', auth.isSeeker, function(req, res){
     })
 });
 
-router.get('/profile', auth.isLoggedIn, function(req, res){
+router.get('/profile', auth.isSeeker, function(req, res){
     var user = new User('', '');
     user.id = req.session.userID;
     user.byID(function(err, u){

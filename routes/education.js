@@ -37,5 +37,46 @@ router.post('/new', auth.isSeeker, function(req, res){
     // res.render('education/new');
 });
 
+router.get('/edit/:id', auth.isSeeker, function(req, res){
+    var e = new Education('', '', '', '', '');
+    e.id = req.params.id;
+    e.byID(function(err, ed){
+        if (err) {
+            res.locals.sessionFlash = {
+                type: 'danger',
+                message: err,
+            }
+            res.render('education/edit');
+        } else {
+            res.render('education/edit', {ed: ed});
+        }
+    });
+});
+
+router.post('/edit/:id', auth.isSeeker, function(req, res){
+    var name = req.body.name;
+    var major = req.body.major;
+    var yearStarted = Number(req.body.yearStarted);
+    var yearEnded = Number(req.body.yearEnded);
+    var gpa = req.body.gpa;
+    var e = new Education(name, major, yearStarted, yearEnded, gpa);
+    e.id = req.params.id;
+    e.update(function(err, ed){
+        if (err) {
+            req.session.sessionFlash = {
+                type: 'danger',
+                message: err,
+            }
+            res.redirect('/education/edit/'+req.params.id);
+        } else {
+            req.session.sessionFlash = {
+                type: 'success',
+                message: 'Successfully updated education',
+            }
+            res.redirect('/user/profile');
+        }
+    });
+});
+
 
 module.exports = router;

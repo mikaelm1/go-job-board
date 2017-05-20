@@ -27,6 +27,10 @@ Job.prototype.apply = function(uid, callback) {
     });
 }
 
+// employer removes job
+// Job.prototype.remove = function()
+
+// applicant withdraws applicant
 Job.prototype.withdraw = function(uid, callback) {
     var sql = 'DELETE FROM jobs_users WHERE uid=? AND jid=?';
     pool.query(sql, [uid, this.id], function(err, result){
