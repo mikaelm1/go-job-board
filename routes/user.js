@@ -130,7 +130,40 @@ router.get('/profile', auth.isLoggedIn, function(req, res){
             });
 
         }
-    })
+    });
+});
+
+router.get('/profile/:id/public', auth.isLoggedIn, function(req, res){
+    var user = new User('', '');
+    user.id = req.params.id;
+    user.byID(function(err, u){
+        if (err) {
+            req.session.sessionFlash = {
+                type: 'danger',
+                message: 'Error: ' + err,
+            }
+            res.redirect('/');
+        } else {
+            user.byIDWithEducation(function(err, education){
+                if (err) {
+                    res.locals.sessionFlash = {
+                        type: 'danger',
+                        message: 'Error ' + err,
+                    }
+                } 
+                user.projects(function(err, projects){
+                    if (err) {
+                        res.locals.sessionFlash = {
+                            type: 'danger',
+                            message: 'Error ' + err,
+                        }
+                    }
+                    res.render('userprofile', {education: education, user: u, projects: projects});
+                });
+            });
+
+        }
+    });
 });
 
 module.exports = router;

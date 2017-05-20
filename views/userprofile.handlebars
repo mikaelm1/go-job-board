@@ -36,9 +36,12 @@
                     {{/each}}
                 </div>
             </div>
-            <form action="/education/" method="get">
-                <button type="submit" class="btn btn-primary">Add Education</button>
-            </form>
+            {{#if isEmployer}}
+            {{else}}
+                <form action="/education/" method="get">
+                    <button type="submit" class="btn btn-primary">Add Education</button>
+                </form>
+            {{/if}}
         </div>
     </div>
 

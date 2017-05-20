@@ -1,0 +1,19 @@
+{{>header}}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h1 class="text-center">Applicants</h1>
+            {{#each users}}
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{ this.name }}</h3> 
+                    </div>
+                    <div class="panel-body text-left">
+                            <strong>Email: </strong><p>{{ this.email }}</p>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</div>

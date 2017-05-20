@@ -24,16 +24,20 @@
         <div class="col-md-6 col-md-offset-3 text-center">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Jobs</h3> 
+                    <h3 class="panel-title">Your Jobs</h3> 
                 </div>
                 <div class="panel-body text-left">
                     {{#each jobs}}
                         <hr>   
                         <strong>Title:</strong> <p>{{ this.title }}</p>
                         <strong>Description:</strong> <p>{{ this.notes }}</p>
-                        {{!--<form action="/education/edit" method="get">
-                            <button type="submit" class="btn btn-primary">Edit</button>
-                        </form>--}}
+                        
+                        <form action="/employer/applicants/{{this.id}}" method="get">
+                            <button type="submit" class="btn btn-primary">View Applicants</button>
+                        </form>
+                        <form action="/employer/applicants/{{this.id}}" method="get" style="margin-top: 10px;">
+                            <button type="submit" class="btn btn-primary">Remove Job</button>
+                        </form>
                     {{/each}}
                 </div>
             </div>

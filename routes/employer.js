@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var Employer = require("../models/employer");
+var Job = require("../models/job");
 var auth = require("../middleware/auth");
 
 router.get('/login', function(req, res){
@@ -89,6 +90,20 @@ router.get('/profile', auth.isEmployer, function(req, res){
                 res.render('employer/profile', {employer: e, jobs: jobs});
             });
         }
+    });
+});
+
+router.get('/applicants/:jid', auth.isEmployer, function(req, res){
+    var j = new Job('', '');
+    j.id = req.params.jid;
+    j.allApplicants(function(err, users){
+        if (err) {
+            res.locals.sessionFlash = {
+                type: 'danger',
+                message: err,
+            }
+        }
+        res.render('employer/applicants', {users: users});
     });
 });
 

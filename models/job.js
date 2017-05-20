@@ -82,4 +82,24 @@ Job.prototype.getAll = function(callback) {
     });
 }
 
+Job.prototype.allApplicants = function(callback) {
+    var sql = 'SELECT u.id, u.name, u.email FROM users u ' +
+    'INNER JOIN jobs_users js ON js.uid = u.id WHERE js.jid=?';
+    pool.query(sql, this.id, function(err, r){
+        if (err) {
+            callback(err, null) 
+        } else {
+            var users = [];
+            for (var i=0; i<r.length; i++) {
+                users[i] = {
+                    id: r[i].id,  
+                    name: r[i].name,
+                    email: r[i].email,
+                }
+            }
+            callback(null, users);
+        }
+    });
+}
+
 module.exports = Job;
