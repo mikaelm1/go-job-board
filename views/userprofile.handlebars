@@ -64,9 +64,12 @@
                     {{/each}}
                 </div>
             </div>
-            <form action="/project/new" method="get">
-                <button type="submit" class="btn btn-primary">Add Project</button>
-            </form>
+            {{#if isEmployer}}
+            {{else}}
+                <form action="/project/new" method="get">
+                    <button type="submit" class="btn btn-primary">Add Project</button>
+                </form>
+            {{/if}}
         </div>
     </div>
 

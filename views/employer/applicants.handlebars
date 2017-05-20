@@ -11,6 +11,9 @@
                     </div>
                     <div class="panel-body text-left">
                             <strong>Email: </strong><p>{{ this.email }}</p>
+                            <form action="/user/profile/{{this.id}}/public" method="get">
+                                <button type="submit" class="btn btn-primary">View Profile</button>
+                            </form>
                     </div>
                 </div>
             {{/each}}
