@@ -16,13 +16,24 @@ Job.prototype.create = function(eid, callback) {
     });
 }
 
+Job.prototype.apply = function(uid, callback) {
+    var sql = 'INSERT INTO jobs_users (uid, jid) VALUES (?, ?)';
+    pool.query(sql, [uid, this.id], function(err, result){
+        if (err) {
+            callback(err, null);
+        } else {
+            callback(null, result);
+        }
+    });
+}
+
 Job.prototype.getAll = function(callback) {
     var sql = 'SELECT * FROM jobs';
     pool.query(sql, function(err, results){
         if (err) {
             callback(err, null);
         } else {
-            console.log(results);
+            // console.log(results);
             if (results.length === 0) {
                 callback(null, []);
             } else {

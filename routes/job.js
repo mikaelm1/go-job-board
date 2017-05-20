@@ -38,4 +38,31 @@ router.post('/new', auth.isEmployer, function(req, res){
     });
 });
 
+router.post('/:id/apply', auth.isSeeker, function(req, res){
+    var j = new Job('', '');
+    j.id = req.params.id;
+    j.apply(req.session.userID, function(err, job){
+        if (err) {
+            if (err.code === 'ER_DUP_ENTRY') {
+                req.session.sessionFlash = {
+                    type: 'danger',
+                    message: 'You have already applied to this job',
+                }
+            } else {
+                req.session.sessionFlash = {
+                    type: 'danger',
+                    message: 'Error: ' + err,
+                }
+            }
+            // console.log(err.code);
+        } else {
+            req.session.sessionFlash = {
+                type: 'success',
+                message: 'Successfully applied to job!',
+            }
+        }
+        res.redirect('/job');
+    });
+});
+
 module.exports = router;

@@ -56,7 +56,7 @@ Employer.prototype.jobsByID = function(callback) {
         if (err) {
             callback(err, null);
         } else {
-            console.log(jobs);
+            // console.log(jobs);
             callback(null, jobs);
         }
     });
