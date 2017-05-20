@@ -16,6 +16,25 @@ router.get('/', auth.isLoggedIn, function(req, res){
     })
 });
 
+router.get('/filter', auth.isLoggedIn, function(req, res){
+    var filter = req.query.search;
+    var j = new Job();
+    j.byTitle(filter, function(err, jobs){
+        if (err) {
+            res.locals.sessionFlash = {
+                type: 'danger',
+                message: err,
+            }
+        } 
+        res.render('job/index', {jobs: jobs});
+    });
+});
+
+router.post('/filter', auth.isLoggedIn, function(req, res){
+    var filter = req.body.search;
+    res.redirect('/job/filter?search='+filter);
+});
+
 router.get('/new', auth.isEmployer, function(req, res){
     res.render('job/new');
 });

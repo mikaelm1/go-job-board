@@ -38,6 +38,26 @@ Job.prototype.withdraw = function(uid, callback) {
     });
 }
 
+Job.prototype.byTitle = function(filter, callback) {
+    var sql = "SELECT * FROM jobs WHERE title LIKE ?";
+    pool.query(sql, '%'+filter+'%', function(err, results){
+        if (err) {
+            callback(err, null);
+        } else {
+            // console.log(results);
+            var jobs = [];
+            for (var i=0; i<results.length; i++) {
+                jobs[i] = {
+                    id: results[i].id,  
+                    title: results[i].title,
+                    notes: results[i].notes,
+                }
+            }
+            callback(null, jobs);
+        }
+    });
+}
+
 Job.prototype.getAll = function(callback) {
     var sql = 'SELECT * FROM jobs';
     pool.query(sql, function(err, results){
