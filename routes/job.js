@@ -3,7 +3,7 @@ var router = express.Router();
 var Job = require("../models/job");
 var auth = require("../middleware/auth");
 
-router.get('/', function(req, res){
+router.get('/', auth.isLoggedIn, function(req, res){
     var j = new Job('', '');
     j.getAll(function(err, jobs){
         if (err) {
@@ -35,6 +35,25 @@ router.post('/new', auth.isEmployer, function(req, res){
             }
         }
         res.redirect('/employer/profile');
+    });
+});
+
+router.post('/:id/withdraw', auth.isSeeker, function(req, res){
+    var j = new Job('', '');
+    j.id = req.params.id;
+    j.withdraw(req.session.userID, function(err, r){
+        if (err) {
+            req.session.sessionFlash = {
+                type: 'danger',
+                message: err,
+            }
+        } else {
+            req.session.sessionFlash = {
+                type: 'success',
+                message: 'App successfully withdrawn'
+            }
+        }
+        res.redirect('/user/apps');
     });
 });
 

@@ -80,7 +80,7 @@ User.prototype.applications = function(callback) {
         if (err) {
             callback(err, null);
         } else {
-            console.log(results);
+            // console.log(results);
             var data = [];
             for (var i=0; i<results.length; i++) {
                 data[i] = {
