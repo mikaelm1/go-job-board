@@ -21,7 +21,7 @@ var isSeeker = function(req, res, next) {
         return next();
     } else {
         console.log('AUTH for seeker failed');
-        res.redirect('/');
+        res.redirect('/user/login');
     }
 }
 
@@ -32,7 +32,7 @@ var isEmployer = function(req, res, next) {
         return next();
     } else {
         console.log('AUTH for employer failed');
-        res.redirect('/');
+        res.redirect('/employer/login');
     }
 }
 
