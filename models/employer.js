@@ -42,7 +42,7 @@ Employer.prototype.byID = function(callback) {
                     email: e[0].email,
                     name: e[0].name,
                     city: e[0].city,
-                    state: [0].state,
+                    state: e[0].state,
                 }
                 callback(null, employer);
             }

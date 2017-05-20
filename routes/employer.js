@@ -78,7 +78,7 @@ router.get('/profile', auth.isEmployer, function(req, res){
                 message: err,
             }
         } 
-        console.log(e);
+        // console.log(e);
         res.render('employer/profile', {employer: e});
     });
 });

@@ -10,6 +10,7 @@ var isLoggedIn = function (req, res, next) {
         res.locals.isEmployer = isEmployer;
         return next();
     }
+    console.log('AUTH failed');
     res.redirect("/user/login");
 }
 
@@ -19,6 +20,7 @@ var isSeeker = function(req, res, next) {
         res.locals.isEmployer = false;
         return next();
     } else {
+        console.log('AUTH for seeker failed');
         res.redirect('/');
     }
 }
@@ -29,6 +31,7 @@ var isEmployer = function(req, res, next) {
         res.locals.isEmployer = true;
         return next();
     } else {
+        console.log('AUTH for employer failed');
         res.redirect('/');
     }
 }
