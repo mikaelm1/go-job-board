@@ -77,9 +77,18 @@ router.get('/profile', auth.isEmployer, function(req, res){
                 type: 'danger',
                 message: err,
             }
-        } 
-        // console.log(e);
-        res.render('employer/profile', {employer: e});
+            res.render('employer/profile', {employer: e});
+        } else {
+            employer.jobsByID(function(err, jobs){
+                if (err) {
+                    res.locals.sessionFlash = {
+                        type: 'danger',
+                        message: err
+                    }
+                }
+                res.render('employer/profile', {employer: e, jobs: jobs});
+            });
+        }
     });
 });
 

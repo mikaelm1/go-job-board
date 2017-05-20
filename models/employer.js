@@ -50,6 +50,18 @@ Employer.prototype.byID = function(callback) {
     });
 }
 
+Employer.prototype.jobsByID = function(callback) {
+    var sql = 'SELECT * FROM jobs where e_id=?';
+    pool.query(sql, this.id, function(err, jobs) {
+        if (err) {
+            callback(err, null);
+        } else {
+            console.log(jobs);
+            callback(null, jobs);
+        }
+    });
+}
+
 Employer.prototype.create = function(callback) {
     var sql = 'INSERT INTO employers (email, name, password, city, state) VALUES (?, ?, ?, ?, ?)';
     pool.query({
@@ -59,7 +71,7 @@ Employer.prototype.create = function(callback) {
         if (err) {
             callback(err, null);
         } else {
-            console.log(results);
+            // console.log(results);
             callback(null, results);
         }
     });

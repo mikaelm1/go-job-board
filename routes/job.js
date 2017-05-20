@@ -22,7 +22,7 @@ router.get('/new', auth.isEmployer, function(req, res){
 
 router.post('/new', auth.isEmployer, function(req, res){
     var j = new Job(req.body.title, req.body.notes);
-    j.create(req.userID, function(err, job){
+    j.create(req.session.userID, function(err, job){
         if (err) {
             req.session.sessionFlash = {
                 type: 'danger',
