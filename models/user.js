@@ -73,6 +73,28 @@ User.prototype.projects = function(callback) {
     });
 }
 
+User.prototype.applications = function(callback) {
+    var sql = 'SELECT j.id, j.title, j.notes, j.e_id FROM jobs j ' + 
+    'INNER JOIN jobs_users js ON js.jid = j.id WHERE js.uid=?';
+    pool.query(sql, this.id, function(err, results){
+        if (err) {
+            callback(err, null);
+        } else {
+            console.log(results);
+            var data = [];
+            for (var i=0; i<results.length; i++) {
+                data[i] = {
+                    id: results[i].id,
+                    title: results[i].title,
+                    notes: results[i].notes,
+                    eid: results[i].e_id,
+                }
+            }
+            callback(null, data);
+        }
+    })
+}
+
 User.prototype.byIDWithEducation = function(callback) {
     // var sql = 'SELECT * FROM users u INNER JOIN '+
     // 'education ed ON ed.user_id = u.id '+

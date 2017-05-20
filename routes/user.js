@@ -81,6 +81,22 @@ router.get('/logout', function(req, res){
     res.redirect('/');
 });
 
+router.get('/apps', auth.isSeeker, function(req, res){
+    var user = new User('', '');
+    user.id = req.session.userID;
+    user.applications(function(err, apps){
+        if (err) {
+            res.locals.sessionFlash = {
+                type: 'danger',
+                message: err,
+            }
+            res.render('user/apps');
+        } else {
+            res.render('user/apps', {jobs: apps});
+        }
+    })
+});
+
 router.get('/profile', auth.isLoggedIn, function(req, res){
     var user = new User('', '');
     user.id = req.session.userID;

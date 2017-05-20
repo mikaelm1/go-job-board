@@ -1,0 +1,22 @@
+{{>header}}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h1 class="text-center">Your Applications</h1>
+            {{#each jobs}}
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">{{ this.title }}</h3> 
+                    </div>
+                    <div class="panel-body text-left">
+                            <strong></strong> <p>{{ this.notes }}</p>
+                            <form action="/job/{{this.id}}/cancel" method="post">
+                                <button type="submit" class="btn btn-primary">Withdraw Application</button>
+                            </form>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</div>
